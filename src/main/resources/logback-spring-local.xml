@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_PATH" value="/Applications/upload/log"/>
+
+    <appender name="apiTest" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/apiTest.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> <!-- rollover daily -->
+            <fileNamePattern>${LOG_PATH}/rolling.%d{yy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>30MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%cyan(%d{yyyy-MM-dd HH:mm:ss})-%highlight(%-5level)-%white(%logger{0}[%method:%line])- %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%cyan(%d{yyyy-MM-dd HH:mm:ss})-%highlight(%-5level)-%white(%logger{0}[%method:%line])- %msg%n</pattern>
+        </layout>
+    </appender>
+
+
+    <logger name="com.imo.kotlintest">
+        <level value="DEBUG"/>
+        <appender-ref ref="apiTest"/>
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="apiTest"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
