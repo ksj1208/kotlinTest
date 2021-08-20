@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 
 @RestControllerAdvice
 class CommonExceptionHandler {
-    private val logger = KLogging()
+    private val logger = KLogging().logger
 
     @ExceptionHandler(value = [RuntimeException::class])
     fun runTimeExceptionHandler(e:RuntimeException) :ResponseEntity<String> {
-        logger.logger.error { e }
+        logger.error { e }
         return ResponseEntity.badRequest().build()
     }
 
     @ExceptionHandler(value = [Exception::class])
     fun exceptionHandler(e:Exception) :ResponseEntity<String> {
-        logger.logger.error { e }
+        logger.error { e }
         return ResponseEntity.badRequest().build()
     }
 }

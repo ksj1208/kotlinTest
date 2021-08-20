@@ -22,6 +22,7 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
 
     override fun configure(web: WebSecurity) {
         web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+                .antMatchers("/retrievers/contentSave")
     }
 
     override fun configure(http: HttpSecurity) {
