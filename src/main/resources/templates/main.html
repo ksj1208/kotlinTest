@@ -7,6 +7,7 @@
 </head>
 <body>
 <a sec:authorize="isAnonymous()" th:href="@{/users/loginPage}">로그인</a>
+<a sec:authorize="isAnonymous()" th:href="@{/users/signPage}">회원가입</a>
 <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
 </body>
 </html>

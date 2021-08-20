@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserService(val userRepository: UserRepository, val passwordEncoder: PasswordEncoder) {
-    fun save(dto: UserCreateRequest) {
+    fun create(dto: UserCreateRequest) {
         userRepository.save(dto.toEntity(passwordEncoder))
     }
 }

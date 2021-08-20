@@ -8,6 +8,11 @@ class UserIndexController {
 
     @GetMapping("/users/loginPage")
     fun loginPage() :String{
-        return "login"
+        return "user/login"
+    }
+
+    @GetMapping("/users/signPage")
+    fun signPage() :String{
+        return "user/sign"
     }
 }
