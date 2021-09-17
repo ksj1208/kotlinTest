@@ -41,6 +41,7 @@ dependencies {
     implementation("io.springfox:springfox-swagger-ui:2.9.2")
     implementation("io.springfox:springfox-swagger2:2.9.2")
     implementation("io.github.microutils:kotlin-logging:1.12.5")
+    implementation ("commons-io:commons-io:2.6")
 }
 
 tasks.withType<KotlinCompile> {
