@@ -1,7 +1,7 @@
 const boardWrite = {
 
     init: () => {
-        smartEditor.init('content')
+        smartEditor.init()
         boardWrite.bind()
     },
 

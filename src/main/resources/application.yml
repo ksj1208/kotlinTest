@@ -21,3 +21,7 @@ spring:
 
 logging:
   config: classpath:logback-spring-local.xml
+
+file-path:
+  root: /Applications/upload
+  image: /image/

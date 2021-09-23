@@ -1,7 +1,4 @@
 const smartEditor = {
-
-    oEditors: [],
-
     init: (target) => {
         smartEditor.createFrame(target)
         smartEditor.bind()
@@ -11,28 +8,38 @@ const smartEditor = {
 
     },
 
-    createFrame: (target) => {
-        nhn.husky.EZCreator.createInIFrame({
-            oAppRef: smartEditor.oEditors,
-            elPlaceHolder: target,
-            sSkinURI: "/smartEditor/SmartEditor2Skin.html",
-            htParams: {
-                // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-                bUseToolbar: true,
-                // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-                bUseVerticalResizer: true,
-                // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-                bUseModeChanger: true,
-                fOnBeforeUnload: function () {
-
+    createFrame: () => {
+            $('.summernote').summernote({
+            height: 400,
+            width: 1000,
+            lang: "ko-KR",
+            callbacks: {
+                onImageUpload: (files) => {
+                    Array.from(files).forEach((file) => {
+                        smartEditor.imageUpload(file)
+                    })
                 }
-            },
-            fCreator: "createSEditor2"
-        })
+            }
+        });
     },
 
-    updateContent: (target) => {
-        smartEditor.oEditors.getById[target].exec("UPDATE_CONTENTS_FIELD", []);
-    }
+    imageUpload: (file) => {
+        const formData = new FormData()
+        formData.append("file", file)
 
+        const successHandler = (data) => {
+            $('.summernote').summernote('editor.insertImage', data)
+        }
+
+        fetch("/files/imageUpload", {
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+            },
+            body: formData
+        })
+            .then((response) => response.text())
+            .then((data) => successHandler(data))
+            .catch((error) => alert(error))
+    }
 }
