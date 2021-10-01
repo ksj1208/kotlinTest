@@ -14,9 +14,22 @@ const boardWrite = {
     },
 
     createRequest: () => {
-        smartEditor.updateContent('content')
         const content = document.getElementById('content').value
-        console.log(content)
+        const request = {
+            content: content
+        }
+
+        fetch("/boards/save", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                'X-CSRF-TOKEN': $('meta[name="_csrf"]').attr('content')
+            },
+            body: JSON.stringify(request)
+        })
+            .then((response) => response.text())
+            .then((data) => console.log(data))
+            .catch((error) => alert(error))
     }
 }
 

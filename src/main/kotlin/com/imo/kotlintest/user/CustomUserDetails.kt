@@ -6,7 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 class CustomUserDetails private constructor(
-        private var userCode: Long? = null,
+        private val userCode: Long? = null,
         private var userId: String,
         private var password: String,
         private var authority: String
